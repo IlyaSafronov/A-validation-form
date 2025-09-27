@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Karla';
-  src: url();
+  font-family: "Karla";
+  src: url("./fonts/Karla-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 400 700;
 }
 
@@ -12,7 +12,7 @@
   --light-teal: hsl(186, 15%, 59%);
   --dark-teal: hsl(187, 24%, 22%);
 
-  --ff-base: 'Karla', sans-serif;
+  --ff-base: "Karla", sans-serif;
 }
 
 @layer reset {
@@ -31,3 +31,35 @@ body {
   background-color: var(--pale-green);
 }
 
+h1,
+h2,
+p {
+  margin-block: 0;
+}
+
+input,
+button,
+textarea {
+  font: inherit;
+}
+
+@layer form {
+  .contact {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-inline-size: 700px;
+    margin-inline: auto;
+  }
+  form {
+    display: grid;
+    gap: 1rem;
+    @media (width > 560px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+  }
+  .form-group {
+    display: grid;
+  }
+}
