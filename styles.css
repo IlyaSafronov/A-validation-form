@@ -43,6 +43,12 @@ textarea {
   font: inherit;
 }
 
+@layer layout {
+  .span-all {
+    grid-column: 1 / -1;
+  }
+}
+
 @layer form {
   .contact {
     background: var(--white);
@@ -57,9 +63,72 @@ textarea {
     @media (width > 560px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
   }
+
+  fieldset  {
+    padding: 0;
+    border: 0;
+
+    display: grid;
+    gap: inherit;
+    grid-template-columns: inherit;
+  }
+
+  textarea {
+    resize: none;
+    box-sizing: content-box;
+    height: 3lh;
+  }
+
   .form-group {
     display: grid;
+  }
+  
+  fieldset:has([required]) legend, 
+  .form-group:has([required])label {
+    display: flex;
+    gap: 1ch;
+
+    &::after {
+      content:"*";
+      color: var(--green);
+    }
+  }
+
+  input,
+  textarea,
+  .form-group:has([type="radio"]) {
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+    padding: 0.75em 1.5em;
+
+    &:focus-visible {
+      outline-color: var(--green);
+    }
+  }
+  [type="radio"], 
+  [type="checkbox"] {
+    width: 1rem;
+  }
+
+  .form-group:has([type="radio"], [type="checkbox"]) {
+    display: flex;
+    gap: 1ch;
+  }
+  .form-group:has([type="radio"]:checked) {
+    background-color: var(--pale-green);
+    border-color: var(--green);
+  }
+  button {
+    background: var(--green);
+    color: var(--white);
+    border: 0;
+    padding: 0.75em 1.5em;
+    border-radius: 6px;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--dark-teal);
+    }
   }
 }
