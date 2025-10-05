@@ -55,8 +55,9 @@ textarea {
     padding: 2rem;
     border-radius: 1rem;
     max-inline-size: 700px;
-    margin-inline: auto;
+    margin: 0 auto;
   }
+
   form {
     display: grid;
     gap: 1rem;
@@ -85,7 +86,7 @@ textarea {
   }
   
   fieldset:has([required]) legend, 
-  .form-group:has([required])label {
+  .form-group:has(:not([type="radio"])[required]) label {
     display: flex;
     gap: 1ch;
 
@@ -111,9 +112,21 @@ textarea {
     width: 1rem;
   }
 
+  
+
   .form-group:has([type="radio"], [type="checkbox"]) {
     display: flex;
     gap: 1ch;
+  }
+
+  .form-group:has([type="radio"]) {
+    position: relative;
+
+    label::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
   }
   .form-group:has([type="radio"]:checked) {
     background-color: var(--pale-green);
