@@ -3,10 +3,11 @@ const form = document.querySelector('form');
 
 
 function validateField(field) {
-  const errorEl = field.parentElement.querySelector('.error-message');
+  const errorEl = field.type === 'radio'
+  ? field.closest('fieldset').querySelector('.error-message')
+  :field.parentElement.querySelector('.error-message');
   if(!field.validity.valid) {
-    console.log('field is invalid:', field);
-    errorEl.textContent = 'This field is required';
+    errorEl.textContent = field.dataset.error || 'This field is required';
     return false;
   }
   
