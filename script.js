@@ -6,19 +6,26 @@ function validateField(field) {
   const errorEl = field.type === 'radio'
   ? field.closest('fieldset').querySelector('.error-message')
   :field.parentElement.querySelector('.error-message');
+
   if(!field.validity.valid) {
     errorEl.textContent = field.dataset.error || 'This field is required';
     return false;
   }
-  
+  errorEl.textContent = '';
   return true;
 }
 
-form.addEventListener('submit', function(e){
+form.querySelectorAll('input, textarea').forEach((input) => {
+  input.addEventListener('blur', () => {
+    validateField(input);
+  });
+});
+
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   let isValid = true;
   const fields = form.querySelectorAll('input, textarea');
-  fields.forEach(field => {
+  fields.forEach((field)=> {
     console.log(`Checking ${field.name}`);
     const fieldValid = validateField(field);
 
@@ -26,9 +33,11 @@ form.addEventListener('submit', function(e){
       isValid = false;
     }
   });
+  
   if (isValid) {
-    console.log('submitting');
+    // todo send form data
+    form.reset();
   } else {
-    console.log('error');
+    form.querySelector(':invalid').focus();
   }
 });
